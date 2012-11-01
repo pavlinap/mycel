@@ -87,6 +87,7 @@
         <input type="text" name="topic" />
         <input type="submit" value="Create new topic" />(more than 5 chars)
     </form>
+    <h3>test</h3>
     
     <!-- Messaging -->
     <h2>Messages</h2>
