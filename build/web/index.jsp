@@ -1,3 +1,6 @@
+<%@page import="org.shadownet.data.UserContainer"%>
+<%@page import="org.shadownet.data.UserManager"%>
+<%@page import="org.shadownet.data.UserManager"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Arrays"%>
 <%@page import="java.util.Vector"%>
@@ -14,6 +17,15 @@
     </head>
     <body>
 <a href='index.jsp'>Home</a> <a href='forumExport.jsp'>Export</a> <a href='forumImport.jsp'>Import</a>
+<% 
+    UserManager.loaduser();
+    UserContainer[] users = UserManager.getUser();
+     out.println( "<ul>" );
+    for (int i = 0; i < users.length; i++) {
+        out.println("<li>" + users[i].getUsername() + "</li>");
+    }
+    out.println( "</ul>" );
+%>
 <h1>
 <% 
     //Überprüft ob die Option gesetzt ist, also ob sich der Benutzer berets authentifiziert hat
