@@ -90,7 +90,6 @@
     <h3>test</h3>
     
     <!-- Messaging -->
-    <h2>Messages</h2>
     
 
     
