@@ -1,6 +1,5 @@
 <%@page import="org.shadownet.data.UserContainer"%>
 <%@page import="org.shadownet.data.UserManager"%>
-<%@page import="org.shadownet.data.UserManager"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Arrays"%>
 <%@page import="java.util.Vector"%>
