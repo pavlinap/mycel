@@ -89,7 +89,6 @@
     </form>
     
     <!-- Messaging -->
-    <h2>Messages</h2>
     
 
     
