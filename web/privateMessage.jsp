@@ -28,7 +28,7 @@
             //get all users
             UserContainer[] allUsers = (UserContainer[]) application.getAttribute("users");
 
-            //check if current user is in conversation, else go to start-page
+            //check if current user is in conversation or if conversion even exists, else go to start-page
             if (!currentConversation.getMembers().contains(session.getAttribute("currentSessionUserID"))) {
                 response.sendRedirect("index.jsp");
             }
@@ -53,7 +53,8 @@
             for (int i = 0; i < currentConversation.getAnnouncements().size(); i++) {
                 out.println("<li>");
                 if ((int) announcements.get(i).getUserId() != -1) {
-                    out.println(allUsers[(int) announcements.get(i).getUserId()].getUsername());
+                    out.print(allUsers[(int) announcements.get(i).getUserId()].getUsername());
+                    out.println(": ");
                 }
                 out.println(announcements.get(i).getMessage());
                 out.println(formater.format(announcements.get(i).getDate()));
