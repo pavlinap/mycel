@@ -47,7 +47,7 @@
             out.println("<ul>");
             for (int i = announcements.size() - 1; i >= end_posts; i--) {
                 //Display Date, userID and message text
-                SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
+                SimpleDateFormat df = new SimpleDateFormat();
                 out.println("<li>");
                 //Momentan nur die IDs von dem User angezeigt
                 out.println("<b>" + announcements.get(i).getUserId() + "</b>");
