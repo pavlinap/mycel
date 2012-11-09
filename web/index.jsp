@@ -78,7 +78,7 @@
             for (String topic : topics) {
                 out.println("<li>");
                 int nrOfEntries = ((Vector) forumTopics.get(topic)).size();
-                out.println("  <a href='forumTopicShow.jsp?topic=" + topic + "'>" + topic + "</a> (" + nrOfEntries + ")");
+                out.println("  <a href='forumTopicShow.jsp?topic=" + topic + "'>" + topic.substring(28) + "</a> (" + nrOfEntries + ")");
                 out.println("</li>");
             }
             out.println("</ul>");
