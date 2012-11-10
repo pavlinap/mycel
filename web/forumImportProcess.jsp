@@ -11,8 +11,8 @@
     Hashtable<String,Vector> forumTopicsExternal = (Hashtable<String,Vector>)xstream.fromXML( xml );
     Hashtable<String,Vector> forumTopicsInternal = (Hashtable<String,Vector>)application.getAttribute("ForumTopics");
     
-    forumTopicsInternal.putAll(forumTopicsExternal);
+    forumTopicsExternal.putAll(forumTopicsInternal);
     
-    application.setAttribute("ForumTopics", forumTopicsInternal);
+    application.setAttribute("ForumTopics", forumTopicsExternal);
 %>
 <jsp:forward page="index.jsp"/>
