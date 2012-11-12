@@ -13,8 +13,6 @@
     <div id="forumXML">
 <%
     Hashtable<String,Vector> forumTopics = (Hashtable<String,Vector>)application.getAttribute("ForumTopics");
-    //Vector<Announcement> announcements = (Vector<Announcement>)application.getAttribute("Announcements");
-    // http://xstream.codehaus.org/tutorial.html
     XStream xstream = new XStream(new StaxDriver());
     String xml = xstream.toXML( forumTopics );
     out.println( xml );
