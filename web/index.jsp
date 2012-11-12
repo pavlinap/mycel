@@ -45,9 +45,9 @@
             // Wenn Array mehr als 15 einträge hat, nur die ersten 15 anzeigen, wenn nicht, alle!
             int end_posts = (announcements.size() > 15) ? announcements.size() - 15 : 0;
             out.println("<ul>");
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             for (int i = announcements.size() - 1; i >= end_posts; i--) {
                 //Display Date, userID and message text
-                SimpleDateFormat df = new SimpleDateFormat();
                 out.println("<li>");
                 //Momentan nur die IDs von dem User angezeigt
                 out.println("<b>" + announcements.get(i).getUserId() + "</b>");
