@@ -18,6 +18,6 @@
         messages.add( an );
     }
 %>
-<jsp:forward page="forumTopicShow.jsp">
+<jsp:forward page="forumTopicShow.jsp"> 
     <jsp:param name="topic" value="<%= topic %>" />
 </jsp:forward>
