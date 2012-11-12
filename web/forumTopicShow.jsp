@@ -11,9 +11,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Forum</title>
-        <script type="text/javascript">
-            console.log(localStorage["forumXML"]);
-        </script>
         <script type="text/javascript" src="js/autoStorage.js" charset="utf-8"></script>
     </head>
     <body>
