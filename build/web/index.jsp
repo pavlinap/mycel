@@ -1,4 +1,5 @@
-<%@page import="org.shadownet.data.UserContainer"%>
+<%@page import="org.shadownet.data.User"%>
+<%@page import="org.shadownet.data.Group"%>
 <%@page import="org.shadownet.data.UserManager"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Arrays"%>
@@ -19,7 +20,7 @@
         <%
             //load users
             UserManager.loaduser();
-            UserContainer[] users = UserManager.getUser();
+            User[] users = UserManager.getAllUsers();
             if (application.getAttribute("users") == null) {
                 application.setAttribute("users", users);
             }
@@ -45,9 +46,9 @@
             // Wenn Array mehr als 15 einträge hat, nur die ersten 15 anzeigen, wenn nicht, alle!
             int end_posts = (announcements.size() > 15) ? announcements.size() - 15 : 0;
             out.println("<ul>");
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             for (int i = announcements.size() - 1; i >= end_posts; i--) {
                 //Display Date, userID and message text
-                SimpleDateFormat df = new SimpleDateFormat();
                 out.println("<li>");
                 //Momentan nur die IDs von dem User angezeigt
                 out.println("<b>" + announcements.get(i).getUserId() + "</b>");
@@ -95,8 +96,8 @@
                 out.println("<h2>Messages</h2>");
                 out.println("<ul>");
                 for (int i = 0; i < users.length; i++) {
-                    if ((Long) session.getAttribute("currentSessionUserID") != users[i].getId()) {
-                        out.println("<li><a href=privateMessageCheck.jsp?recipient=" + users[i].getId() + ">" + users[i].getUsername() + "</a></li>");
+                    if ((Long) session.getAttribute("currentSessionUserID") != users[i].getID()) {
+                        out.println("<li><a href=privateMessageCheck.jsp?recipient=" + users[i].getID() + ">" + users[i].getUsername() + "</a></li>");
                     }
                 }
             }

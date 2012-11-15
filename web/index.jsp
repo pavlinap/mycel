@@ -1,4 +1,5 @@
-<%@page import="org.shadownet.data.UserContainer"%>
+<%@page import="org.shadownet.data.User"%>
+<%@page import="org.shadownet.data.Group"%>
 <%@page import="org.shadownet.data.UserManager"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Arrays"%>
@@ -19,7 +20,7 @@
         <%
             //load users
             UserManager.loaduser();
-            UserContainer[] users = UserManager.getUser();
+            User[] users = UserManager.getAllUsers();
             if (application.getAttribute("users") == null) {
                 application.setAttribute("users", users);
             }
@@ -95,8 +96,8 @@
                 out.println("<h2>Messages</h2>");
                 out.println("<ul>");
                 for (int i = 0; i < users.length; i++) {
-                    if ((Long) session.getAttribute("currentSessionUserID") != users[i].getId()) {
-                        out.println("<li><a href=privateMessageCheck.jsp?recipient=" + users[i].getId() + ">" + users[i].getUsername() + "</a></li>");
+                    if ((Long) session.getAttribute("currentSessionUserID") != users[i].getID()) {
+                        out.println("<li><a href=privateMessageCheck.jsp?recipient=" + users[i].getID() + ">" + users[i].getUsername() + "</a></li>");
                     }
                 }
             }

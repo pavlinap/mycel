@@ -4,7 +4,7 @@
 <%@page import="org.shadownet.data.Conversation"%>
 <%@page import="java.util.Hashtable"%>
 <%@page import="org.shadownet.data.Announcement"%>
-<%@page import="org.shadownet.data.UserContainer"%>
+<%@page import="org.shadownet.data.User"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.Vector"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -26,7 +26,7 @@
             Conversation currentConversation = (Conversation) allconvs.elementAt(currentID);
 
             //get all users
-            UserContainer[] allUsers = (UserContainer[]) application.getAttribute("users");
+            User[] allUsers = (User[]) application.getAttribute("users");
 
             //check if current user is in conversation or if conversion even exists, else go to start-page
             if (!currentConversation.getMembers().contains(session.getAttribute("currentSessionUserID"))) {

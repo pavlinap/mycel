@@ -4,27 +4,36 @@ package org.shadownet.data;
  * @author Pavlina
  */
 public class UserManager {
-    private static UserContainer[] users = new UserContainer[7];
+    private static User[] users = new User[7];
     public static long findUser(String username, String password){
         long userId=-1;
         //loaduser();
         for (int i=0; i<users.length; i++){
             if(username.equals(users[i].getUsername()) && password.equals(users[i].getPassword())){
-                userId = users[i].getId();
+                userId = users[i].getID();
             }
         }
         return userId;
     }
     public static void loaduser(){
-        users[0] = new UserContainer("Julia", "julia", 0);
-        users[1] = new UserContainer("Lisa", "lisa", 1);
-        users[2] = new UserContainer("Martin", "martin", 2);
-        users[3] = new UserContainer("Pavlina", "pavlina", 3);
-        users[4] = new UserContainer("Ralph", "ralph", 4);
-        users[5] = new UserContainer("Richard", "richard", 5);
-        users[6] = new UserContainer("Stefan", "stefan", 6);
+        users[0] = new User("Julia", "julia");
+        users[1] = new User("Lisa", "lisa");
+        users[2] = new User("Martin", "martin");
+        users[3] = new User("Pavlina", "pavlina");
+        users[4] = new User("Ralph", "ralph");
+        users[5] = new User("Richard", "richard");
+        users[6] = new User("Stefan", "stefan");
     }
-    public static UserContainer[] getUser(){
+    public static User[] getAllUsers(){
         return users;
+    }
+    public static User getUserById(long userid){
+        User founduser=null;
+        for (int i=0; i<users.length; i++){
+            if (users[i].getID() == userid){
+                founduser = users[i];
+            }
+        }
+        return founduser;
     }
 }

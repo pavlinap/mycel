@@ -39,8 +39,8 @@ public class SimpleLogin extends HttpServlet {
             HttpSession session = request.getSession(true);
             session.setAttribute("currentSessionUsername",username);
             session.setAttribute("currentSessionUserID",userID);
-            UserContainer[] allUsers = UserManager.getUser();
-            session.setAttribute("currentSessionUser", allUsers[(int)userID]);
+            //User[] allUsers = UserManager.getUser();
+            session.setAttribute("currentSessionUser", UserManager.getUserById(userID));
             response.sendRedirect("index.jsp");
         } else {
             //I know it seems redundant, but maybe we want it to redirect somewhere else! :)
