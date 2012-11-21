@@ -1,24 +1,37 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="org.shadownet.data.UserManager"%>
+<%@page import="org.shadownet.data.Group"%>
+<%@page import="org.shadownet.data.User"%>
 <%@page import="org.shadownet.data.Conversation"%>
 <%@page import="org.shadownet.data.Announcement"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.Vector"%>
 <%
-    Vector<Conversation> allConversations = (Vector<Conversation>) application.getAttribute("Conversations");
+    long recipientId = 0;
+    //get conversation
+    if (request.getParameter("recId") == null) {
+        response.sendRedirect("index.jsp");
+    } else {
+        User currentUser = (User) session.getAttribute("currentSessionUser");
+        recipientId = Long.parseLong(request.getParameter("recId"));
+        Group recipient = UserManager.getUserById(recipientId);
+        // create or load conversation
+        if (recipient == null) {
+            response.sendRedirect("index.jsp");
+        } else {
+            Conversation userConv = currentUser.addOrGetConversation(recipient);
+            Conversation recipientConv = recipient.addOrGetConversation(currentUser);
 
-    String currentID = request.getParameter("conversation");
-    if (currentID == null) {
-        out.println("We should never get here!!!");
-    }
-    
-    int intID = Integer.parseInt(currentID);
-    Conversation currentConversation = allConversations.elementAt(intID);
-    Vector<Announcement> messages = (Vector<Announcement>) currentConversation.getAnnouncements();
+            // add message to conversation
+            String message = request.getParameter("message");
+            if ((message != null) && (message.length() > 0) && (message.length() < 1000)) {
+                Announcement announcement = new Announcement(new Date(), message, currentUser.getID());
+                userConv.addAnnouncement(announcement);
+                recipientConv.addAnnouncement(announcement);
+            }
+        }
 
-    String message = request.getParameter("message");
-    if ((message != null) && (message.length() > 0) && (message.length() < 1000)) {
-        // should make sure String has no JS or HTML!
-        Announcement an = new Announcement(new Date(), message, (Long)session.getAttribute("currentSessionUserID"));
-        messages.add(an);
     }
-    response.sendRedirect("privateMessage.jsp?conversation=" + currentID);
+    // redirect to conversation
+    response.sendRedirect("privateMessage.jsp?recId=" + recipientId);
 %>

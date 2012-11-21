@@ -1,6 +1,7 @@
 package org.shadownet.data;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 /**
@@ -15,10 +16,12 @@ public class Group {
     private String group_name;
     private String privateKey;
     private String publicKey;
+    private Hashtable<Group, Conversation> conversations;
     
     public Group(String name){
         group_name=name;
         group_id=(long) (10000*Math.random());
+        conversations = new Hashtable<Group, Conversation>();
         //mk5 id
     }
     
@@ -43,4 +46,24 @@ public class Group {
     public Group getUser(int index){
         return myFriends.get(index);
     } 
+    
+    /**
+     * @return the conversations
+     */
+    public Hashtable<Group, Conversation> getConversations() {
+        return conversations;
+    }
+    /**
+     * add new conversation if not exists
+     */
+    public Conversation addOrGetConversation(Group g) {
+        Conversation conversation;
+        if(conversations.containsKey(g)) {
+            conversation = conversations.get(g);
+        } else {
+            conversation = new Conversation(g);
+            conversations.put(g, conversation);
+        }
+        return conversation;
+    }
 }

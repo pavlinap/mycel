@@ -19,9 +19,10 @@
         <a href='index.jsp'>Home</a> <a href='forumExport.jsp'>Export</a> <a href='forumImport.jsp'>Import</a>
         <%
             //load users
-            UserManager.loaduser();
-            User[] users = UserManager.getAllUsers();
-            if (application.getAttribute("users") == null) {
+            User[] users = (User[])application.getAttribute("users");
+            if (users == null) {
+                UserManager.loaduser();
+                users = UserManager.getAllUsers();
                 application.setAttribute("users", users);
             }
 
@@ -90,14 +91,14 @@
         </form>
 
         <!-- Messaging -->
-        
+
         <%
             if (session.getAttribute("currentSessionUser") != null) {
                 out.println("<h2>Messages</h2>");
                 out.println("<ul>");
                 for (int i = 0; i < users.length; i++) {
                     if ((Long) session.getAttribute("currentSessionUserID") != users[i].getID()) {
-                        out.println("<li><a href=privateMessageCheck.jsp?recipient=" + users[i].getID() + ">" + users[i].getUsername() + "</a></li>");
+                        out.println("<li><a href=privateMessage.jsp?recId=" + users[i].getID() + ">" + users[i].getUsername() + "</a></li>");
                     }
                 }
             }

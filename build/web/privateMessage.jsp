@@ -1,3 +1,5 @@
+<%@page import="org.shadownet.data.Group"%>
+<%@page import="org.shadownet.data.UserManager"%>
 <%@page import="org.omg.CORBA.PRIVATE_MEMBER"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.sun.org.apache.bcel.internal.generic.PUTFIELD"%>
@@ -19,56 +21,45 @@
     <body>
         <a href='index.jsp'>Home</a>
         <%
-            int currentID = Integer.parseInt(request.getParameter("conversation"));
-
+            long recipientId = 0;
             //get conversation
-            Vector allconvs = (Vector) application.getAttribute("Conversations");
-            Conversation currentConversation = (Conversation) allconvs.elementAt(currentID);
-
-            //get all users
-            User[] allUsers = (User[]) application.getAttribute("users");
-
-            //check if current user is in conversation or if conversion even exists, else go to start-page
-            if (!currentConversation.getMembers().contains(session.getAttribute("currentSessionUserID"))) {
+            if (request.getParameter("recId") == null) {
                 response.sendRedirect("index.jsp");
-            }
+            } else {
 
-            // show user-names
-            out.println("<h1>");
-            for (int i = 0; i < currentConversation.getMembers().size(); i++) {
-                long userId = (Long) currentConversation.getMembers().elementAt(i);
-                out.print(allUsers[(int) userId].getUsername());
-                if (currentConversation.getMembers().size() - 1 > i) {
-                    out.println(", ");
+                User currentUser = (User)session.getAttribute("currentSessionUser");
+                recipientId = Long.parseLong(request.getParameter("recId"));
+                Group recipient = UserManager.getUserById(recipientId);
+
+                // create or load conversation
+                if (recipient == null) {
+                    response.sendRedirect("index.jsp");
+                } else {
+                    Conversation userConv = currentUser.addOrGetConversation(recipient);
+                    Conversation recipientConv = recipient.addOrGetConversation(currentUser);
+
+                    // todo: show user-names or groupname
+                    // show conversation
+                    Vector<Announcement> announcements = userConv.getAnnouncements();
+                    SimpleDateFormat formater = new SimpleDateFormat();
+                    out.println("<ul>");
+                    for (int i = 0; i < userConv.getAnnouncements().size(); i++) {
+                        out.println("<li>");
+                        if ((int) announcements.get(i).getUserId() != -1) {
+                        }
+                        out.println(announcements.get(i).getUserId());
+                        out.println(announcements.get(i).getMessage());
+                        out.println(formater.format(announcements.get(i).getDate()));
+                        out.println("</li>");
+                    }
+                    out.println("</ul>");
                 }
             }
-            out.println("</h1>");
-
-            // show conversation
-            Vector<Announcement> announcements = currentConversation.getAnnouncements();
-
-            SimpleDateFormat formater = new SimpleDateFormat();
-
-            out.println("<ul>");
-            for (int i = 0; i < currentConversation.getAnnouncements().size(); i++) {
-                out.println("<li>");
-                if ((int) announcements.get(i).getUserId() != -1) {
-                    out.print(allUsers[(int) announcements.get(i).getUserId()].getUsername());
-                    out.println(": ");
-                }
-                out.println(announcements.get(i).getMessage());
-                out.println(formater.format(announcements.get(i).getDate()));
-                out.println("</li>");
-            }
-            out.println("</ul>");
-
-            // TODO: "add user" and "leave conversation" posibility
-            // TODO: "new message" notification*/
         %>
         <form action="privateMessageAdd.jsp" method="POST">
             <textarea name="message" cols="60" rows="1"></textarea><br />
-            <input type="hidden" name="conversation" value="<%=currentID%>" />
             <input type="submit" value="Send message" />
+            <input type="hidden" value="<%=recipientId%>" name="recId" />
         </form>
     </body>
 </html>

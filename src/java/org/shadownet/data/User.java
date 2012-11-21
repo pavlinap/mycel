@@ -4,7 +4,7 @@ package org.shadownet.data;
  * @author Pavlina
  */
 public class User extends Group{
-     private String firstName;
+    private String firstName;
     private String lastName;
     private String password;
     private String username;
