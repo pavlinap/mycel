@@ -89,7 +89,7 @@
             <input type="text" name="topic" />
             <input type="submit" value="Create new topic" />(more than 5 chars)
         </form>
-
+        <!-- Kommentar Jule -->
         <!-- Messaging -->
 
         <%
