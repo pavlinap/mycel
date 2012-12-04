@@ -23,7 +23,7 @@ public class StringChange{
     
     public String DetectLink(String s){
         s = s.replaceAll(".\\swww|^www", " http://www");
-        s = s.replaceAll("((http:[/][/]|www.)([a-z]|[A-Z]|[0-9]|[/.]|[~]|[:]|[#])*)", "<a target=\"_blank\" href=\"$0\">$0</a>");
+        s = s.replaceAll("((http:[/][/]|www.)([\\S])*)", "<a target=\"_blank\" href=\"$0\">$0</a>");
         return s;
     }
 }
