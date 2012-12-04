@@ -33,7 +33,7 @@
                 if (session.getAttribute("currentSessionUsername") == null) {
                     out.print("Benutzer unbekannt, bitte melden Sie sich an - <a href='login.jsp'>Login</a>");
                 } else {
-                    out.print("Willkommen " + session.getAttribute("currentSessionUsername"));
+                    out.print("Willkommen " + session.getAttribute("currentSessionUsername") + " (<a href='logout.jsp'>logout</a>)");
                 }
             %>
         </h1>
