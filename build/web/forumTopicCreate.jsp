@@ -12,4 +12,4 @@
         forumTopics.put( topic, messages );
     }
 %>
-<jsp:forward page="index.jsp"/>
+<jsp:forward page="forum.jsp"/>

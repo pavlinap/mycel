@@ -1,8 +1,11 @@
+<%@page import="org.shadownet.data.User"%>
+<%@page import="org.shadownet.data.Group"%>
+<%@page import="org.shadownet.data.UserManager"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Arrays"%>
+<%@page import="java.util.Vector"%>
 <%@page import="org.shadownet.data.Announcement"%>
 <%@page import="java.util.Hashtable"%>
-<%@page import="java.util.Vector"%>
-<%@page import="com.thoughtworks.xstream.io.xml.StaxDriver"%>
-<%@page import="com.thoughtworks.xstream.XStream"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -12,8 +15,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Forum</title>
-        <script type="text/javascript" src="js/autoStorage.js" charset="utf-8"></script>
+        <title>ShadowNet</title>
         <style>
             a:link {color:#1ea181; text-decoration:none;}    /* unvisited link */
             a:visited {color:#1ea181; text-decoration:none;} /* visited link */
@@ -47,36 +49,38 @@
     </header>
     <div id="content">
         <%
-            Hashtable<String, Vector> forumTopics = (Hashtable<String, Vector>) application.getAttribute("ForumTopics");
-            String topic = request.getParameter("topic");
-            Vector<Announcement> messages = (Vector<Announcement>) forumTopics.get(topic);
-        %>
-        <h1>Forum: <%= topic%></h1>
-        <%
-            if (messages == null) {
-                out.println("We should never get here!!!");
+            //load users
+            User[] users = (User[]) application.getAttribute("users");
+            if (users == null) {
+                UserManager.loaduser();
+                users = UserManager.getAllUsers();
+                application.setAttribute("users", users);
             }
-            out.println("<ul>");
-            for (int i = 0; i < messages.size(); i++) {
-                String msg = messages.get(i).getMessage();
-                out.println("<li>");
-                out.println(msg);
-                out.println("</li>");
+
+        %>
+        <h1>
+            <%
+                //Überprüft ob die Option gesetzt ist, also ob sich der Benutzer berets authentifiziert hat
+                if (session.getAttribute("currentSessionUsername") == null) {
+                    out.print("Benutzer unbekannt, bitte melden Sie sich an!");
+                } else {
+                    out.print("Willkommen " + session.getAttribute("currentSessionUsername") + " (<a href='logout.jsp'>logout</a>)");
+                }
+            %>
+        </h1>
+        <h2>Message System</h2>
+        <%
+            if (session.getAttribute("currentSessionUser") != null) {
+                out.println("<h2>Messages</h2>");
+                out.println("<ul>");
+                for (int i = 0; i < users.length; i++) {
+                    if ((Long) session.getAttribute("currentSessionUserID") != users[i].getID()) {
+                        out.println("<li><a href=privateMessage.jsp?recId=" + users[i].getID() + ">" + users[i].getUsername() + "</a></li>");
+                    }
+                }
             }
             out.println("</ul>");
         %>
-        <form action="forumTopicAdd.jsp" id="formstyle" method="POST">
-            <input type="hidden" name="topic" value="<%= topic%>" />
-            <textarea name="message" cols="60" rows="1"></textarea><br />
-            <input type="submit" value="Post new message" />(more than 10 chars)
-        </form>
-        <div id="forumXML" style="display: none;">
-            <%
-                XStream xstream = new XStream(new StaxDriver());
-                String xml = xstream.toXML(forumTopics);
-                out.println(xml);
-            %>
-        </div>
     </div>
     <div id="footer">
         <a href='forumExport.jsp'>EXPORT</a> <a href='forumImport.jsp'>&nbsp;&nbsp;&nbsp;&nbsp;IMPORT&nbsp;&nbsp;</a>
