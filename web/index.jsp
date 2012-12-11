@@ -36,7 +36,8 @@
                 Password</br>
                 <input type="password" name="pw"/>                        
             </div>
-            <input type="submit" value="submit" hidden="true"> 
+            <!-- style just temporary... style the button ;) -->
+            <input type="submit" value="submit" style="position: absolute; top: -999px;"> 
         </form>
         <div id="head_top_nav">
             <ul>
