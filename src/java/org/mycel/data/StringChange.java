@@ -1,4 +1,4 @@
-package org.shadownet.data;
+package org.mycel.data;
 
 import java.lang.Object;
 import java.lang.String;

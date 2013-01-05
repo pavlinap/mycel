@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.shadownet.data;
+package org.mycel.data;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

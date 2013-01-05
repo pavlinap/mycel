@@ -1,4 +1,4 @@
-package org.shadownet.data;
+package org.mycel.data;
 
 import java.util.Date;
 import java.util.Vector;
