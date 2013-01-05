@@ -1,5 +1,5 @@
-<%@page import="org.shadownet.data.Announcement"%>
-<%@page import="org.shadownet.data.StringChange"%>
+<%@page import="org.mycel.data.Announcement"%>
+<%@page import="org.mycel.data.StringChange"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.Vector"%>
 

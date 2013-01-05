@@ -4,13 +4,13 @@
     Author     : Richard
 --%>
 
-<%@page import="org.shadownet.data.User"%>
-<%@page import="org.shadownet.data.Group"%>
-<%@page import="org.shadownet.data.UserManager"%>
+<%@page import="org.mycel.data.User"%>
+<%@page import="org.mycel.data.Group"%>
+<%@page import="org.mycel.data.UserManager"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Arrays"%>
 <%@page import="java.util.Vector"%>
-<%@page import="org.shadownet.data.Announcement"%>
+<%@page import="org.mycel.data.Announcement"%>
 <%@page import="java.util.Hashtable"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"

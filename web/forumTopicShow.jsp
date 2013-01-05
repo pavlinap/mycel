@@ -1,4 +1,4 @@
-<%@page import="org.shadownet.data.Announcement"%>
+<%@page import="org.mycel.data.Announcement"%>
 <%@page import="java.util.Hashtable"%>
 <%@page import="java.util.Vector"%>
 <%@page import="com.thoughtworks.xstream.io.xml.StaxDriver"%>

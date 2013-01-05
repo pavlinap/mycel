@@ -1,5 +1,5 @@
 <%@page import="java.util.Hashtable"%>
-<%@page import="org.shadownet.data.Announcement"%>
+<%@page import="org.mycel.data.Announcement"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.Vector"%>
 <%

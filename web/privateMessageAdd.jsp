@@ -1,9 +1,9 @@
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="org.shadownet.data.UserManager"%>
-<%@page import="org.shadownet.data.Group"%>
-<%@page import="org.shadownet.data.User"%>
-<%@page import="org.shadownet.data.Conversation"%>
-<%@page import="org.shadownet.data.Announcement"%>
+<%@page import="org.mycel.data.UserManager"%>
+<%@page import="org.mycel.data.Group"%>
+<%@page import="org.mycel.data.User"%>
+<%@page import="org.mycel.data.Conversation"%>
+<%@page import="org.mycel.data.Announcement"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.Vector"%>
 <%
