@@ -3,6 +3,7 @@ package org.mycel.data;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author Pavlina
@@ -12,15 +13,17 @@ public class Group {
     /**
      *
      */
-    protected List<Group> myFriends = new ArrayList<Group>();
-    private String group_name;
+    protected List<Group> myMembers = new ArrayList<Group>();
+    private String group_name; // unique, maybe mygroup@mycel.org
     private String privateKey;
     private String publicKey;
     private Hashtable<Group, Conversation> conversations;
     
     public Group(String name){
         group_name=name;
-        group_id=(long) (10000*Math.random());
+        //group_id=(long) (10000*Math.random());
+        Random nextLong = new Random();
+        group_id=nextLong.nextLong();
         conversations = new Hashtable<Group, Conversation>();
         //mk5 id
     }
@@ -29,22 +32,14 @@ public class Group {
         return group_id;
     }
     
-    public void addUser(Group userToAdd){
-        //;
-        if (userToAdd instanceof User){
-            myFriends.add(userToAdd);
-        }
-        else{
-            System.out.println(userToAdd.group_name + " ist kein user");
-        }
-    }
-    
-    public void removeUser(Group userToRemove){
-        myFriends.remove(userToRemove);
+    public void requestMembership(User u) {
+        // need approval by all members thogh voting
+        // VOTING PROZESS
+
     }
     
     public Group getUser(int index){
-        return myFriends.get(index);
+        return myMembers.get(index);
     } 
     
     /**

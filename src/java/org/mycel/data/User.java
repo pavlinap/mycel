@@ -1,13 +1,17 @@
 package org.mycel.data;
+
+import java.util.List;
+
 /**
  *
  * @author Pavlina
  */
 public class User extends Group{
+    private List<Group> myContacts;
     private String firstName;
     private String lastName;
     private String password;
-    private String username;
+    private String username; //use E-Mail as Username
     
     public User(String myNewUsername, String myNewPassword){
         super(myNewUsername);
@@ -47,7 +51,11 @@ public class User extends Group{
         username = myNewUsername;
     }
     
-    public void addUser(Group userToAdd){
-        myFriends.add(userToAdd);
+    public void addContact(Group userToAdd){
+        // need public keys and id of my contacts
+        myContacts.add(userToAdd);
+    }
+    public void requestMembership(User u) {
+        // do nothing
     }
 }
